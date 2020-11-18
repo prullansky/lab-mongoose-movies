@@ -35,12 +35,40 @@ router.post('/movies', (req, res) => {
     })
     .then (movie => {
         console.log(`${movie.title} was created!`)
-        res.render('movies/index')
+        res.redirect('/movies')
     })
     .catch (err => {
         console.log(err)
     })
 })
 
+router.get('/movies/:id/edit', (req, res) => {
+    Movie.findById(req.params.id)
+    .then(movie => {
+        res.render('movies/edit', {movie}) 
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+});
+
+router.post('/movies/:id', (req, res) => {
+
+    const {title, genre, plot, cast} = req.body;
+
+    Movie.findByIdAndUpdate(req.params.id,{
+        title, 
+        genre, 
+        plot, 
+        cast
+    })
+    .then(movie => {
+        res.redirect('/movies');
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+})
 
 module.exports = router;

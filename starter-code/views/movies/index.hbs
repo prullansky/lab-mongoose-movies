@@ -1,12 +1,13 @@
-<h2>Movies list for real</h2>
+<h2>Movies</h2>
 {{#each movies}}
 <br>
 <p>{{title}}</p>
 <p>{{genre}}</p>
 <p>{{plot}}</p>
 <ul>
-   {{cast}}
+
 </ul>
+<button type='submit'><a href='/movies/{{_id}}/edit'>Edit Movie</a></button>
 <br>
 {{/each}}
 
